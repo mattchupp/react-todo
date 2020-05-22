@@ -5,7 +5,7 @@ class Todo extends Component {
   constructor() {
     super();
     this.state = {
-      itemInput: '',
+      newItem: '',
       todoList: []
     }
 
@@ -14,20 +14,20 @@ class Todo extends Component {
   }
 
   handleChange(event) {
-    this.setState({itemInput: event.target.value});
+    this.setState({newItem: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    const newItem = {
+    const createNewItem = {
       id: Date.now(),
-      input: this.state.itemInput
+      input: this.state.newItem
     }
 
     this.setState(state => ({
-      todoList: state.todoList.concat(newItem),
-      itemInput: ''
+      todoList: state.todoList.concat(createNewItem),
+      newItem: ''
     }));
   }
 
