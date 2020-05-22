@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 
 
 class Todo extends Component {
@@ -33,13 +34,14 @@ class Todo extends Component {
 
     this.setState(state => ({
       todoList: state.todoList.concat(createNewItem),
+      completed: false,
       newItem: ''
     }));
   }
 
   /* handle checkbox being clicked for each item */
   handleCheckboxClick(event) {
-    if(this.state.itemCompleted == true) {
+    if(this.state.itemCompleted === true) {
       this.setState({itemCompleted: false});
     } else {
       this.setState({itemCompleted: true});
@@ -50,7 +52,7 @@ class Todo extends Component {
   render() {
 
     return (
-      <div>
+      <div className="App">
         <form onSubmit={this.handleSubmit}>
           <input
             type='text'
@@ -69,10 +71,11 @@ class Todo extends Component {
                 checked={this.state.itemCompleted}
                 onClick={this.handleCheckboxClick}
               />
-              <span style={this.state.itemCompleted ? {textDecoration: 'line-through'}: {} }>{item.input}</span>
+              <span className={this.state.itemCompleted ? 'completed' : null }>{item.input}</span>
             </li>
           ))}
         </ul>
+
       </div>
     );
   }
