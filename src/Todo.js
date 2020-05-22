@@ -6,11 +6,13 @@ class Todo extends Component {
     super();
     this.state = {
       newItem: '',
-      todoList: []
+      todoList: [],
+      itemCompleted: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
   }
 
   handleChange(event) {
@@ -31,18 +33,40 @@ class Todo extends Component {
     }));
   }
 
+  /* handle checkbox being clicked for each item */
+  handleCheckboxClick(event) {
+    if(this.state.itemCompleted == true) {
+      this.setState({itemCompleted: false});
+    } else {
+      this.setState({itemCompleted: true});
+    }
+  }
+
+
   render() {
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' value={this.state.itemInput} onChange={this.handleChange} placeholder={this.state.itemInput} />
+          <input
+            type='text'
+            value={this.state.newItem}
+            onChange={this.handleChange}
+            placeholder={this.state.itemInput}
+          />
         </form>
         <br />
 
-        <br />
         <ul>
           {this.state.todoList.map(item => (
-            <li key={item.id}>{item.input}</li>
+            <li key={item.id}>
+              <input
+                type="checkbox"
+                checked={this.state.itemCompleted}
+                onClick={this.handleCheckboxClick}
+              />
+              <span className={this.state.itemCompleted ? 'completed' : null}>{item.input}</span>
+            </li>
           ))}
         </ul>
       </div>

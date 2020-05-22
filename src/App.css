@@ -6,3 +6,11 @@
 input {
   padding: .5rem;
 }
+
+.completed {
+  text-decoration: line-through;
+}
+
+li {
+  list-style-type: none;
+}
