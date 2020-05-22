@@ -22,6 +22,10 @@ class Todo extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    if(this.state.newItem.length === 0) {
+      return;
+    }
+
     const createNewItem = {
       id: Date.now(),
       input: this.state.newItem
@@ -65,7 +69,7 @@ class Todo extends Component {
                 checked={this.state.itemCompleted}
                 onClick={this.handleCheckboxClick}
               />
-              <span className={this.state.itemCompleted ? 'completed' : null}>{item.input}</span>
+              <span style={this.state.itemCompleted ? {textDecoration: 'line-through'}: {} }>{item.input}</span>
             </li>
           ))}
         </ul>
